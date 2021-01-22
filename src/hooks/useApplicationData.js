@@ -9,6 +9,7 @@ export default function useApplicationData() {
     interviewers : {}
   });
 
+  //Adding in interviews
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -29,6 +30,7 @@ export default function useApplicationData() {
     })
   }
 
+  //Remove the selected interview
   function deleteInterview(id, interview) {
     return (
       axios.delete(`/api/appointments/${id}`, { interview })
@@ -38,8 +40,8 @@ export default function useApplicationData() {
   }
 
   const setDay = day => setState({ ...state, day });
-
-
+  
+  //Get request to fetch appointments for each day
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),

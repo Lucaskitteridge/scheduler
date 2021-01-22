@@ -25,7 +25,8 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-
+  
+  //Calling the deleteInterview function to remove from database and then transition
   function remove(event) {
     const interview = null;
     transition(DELETE, true);
@@ -55,6 +56,7 @@ export default function Appointment(props) {
     });
     }
 
+    //All the possible different windows in the apoointment windows and when they're callee
   return (
     <article className="appointment">
       <Header time={props.time} />

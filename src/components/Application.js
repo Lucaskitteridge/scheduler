@@ -16,7 +16,7 @@ export default function Application(props) {
     deleteInterview
   } = useApplicationData();
 
-
+  //Maping the schedual for the day and passing the info for each day as props
   let schedule = getAppointmentsForDay(state, state.day)
   .map((appointment) => {
 
