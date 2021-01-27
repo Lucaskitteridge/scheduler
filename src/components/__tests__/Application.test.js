@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-import { render, queryByAltText, cleanup, queryByText, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText } from "@testing-library/react";
+import { render, queryByAltText, cleanup, queryByText, waitForElement, fireEvent, getByText, getAllByTestId, getByAltText, getByPlaceholderText } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -47,8 +47,6 @@ describe("Appointment", () => {
 
     expect(getByText(day, "no spots remaining")).toBeInTheDocument();
 
-    // console.log(prettyDOM(day))
-
   });
   it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
     // 1. Render the Application.
@@ -85,7 +83,7 @@ describe("Appointment", () => {
 
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
   });
-  it("shows the save error when failing to save an appointment", async () => {
+  it("shows the save error when failing to delete an appointment", async () => {
     axios.delete.mockRejectedValueOnce();
 
     const { container } = render(<Application />);

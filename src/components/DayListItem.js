@@ -4,7 +4,8 @@ import classNames from 'classnames';
 import "components/DayListItem.scss";
 
 export default function DayListItem(props) {
-
+  
+  //Shows how many available spots are remaining for each day
   const formatSpots = function (props) {
     if (props.spots === 0) {
       return 'no spots remaining'
@@ -13,7 +14,7 @@ export default function DayListItem(props) {
     } else {
       return props.spots + " spots remaining"
     }
-  }
+  };
 
   const dayListItemClass = classNames("day-list__item", {
     "day-list__item--selected": props.selected,
@@ -26,4 +27,4 @@ export default function DayListItem(props) {
       <h3 className="text--light">{formatSpots(props)}</h3>
     </li>
   );
-}
+};

@@ -8,7 +8,6 @@ import {getAppointmentsForDay, getInterview, getInterviewersForDay} from "helper
 import useApplicationData from "hooks/useApplicationData";
 
 export default function Application(props) {
-
   const {
     state,
     setDay,
@@ -16,10 +15,9 @@ export default function Application(props) {
     deleteInterview
   } = useApplicationData();
 
-  //Maping the schedual for the day and passing the info for each day as props
+  //Maping the schedule for the day and passing the info for each day as props
   let schedule = getAppointmentsForDay(state, state.day)
   .map((appointment) => {
-
     const interview = getInterview(state, appointment.interview);
 
     return (
@@ -62,5 +60,4 @@ export default function Application(props) {
       </section>
     </main>
   );
-}
-
+};
