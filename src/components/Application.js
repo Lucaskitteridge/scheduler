@@ -47,7 +47,8 @@ export default function Application(props) {
           <DayList 
             days={state.days} 
             day={state.day} 
-            setDay={setDay} />
+            setDay={setDay}
+          />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -56,10 +57,8 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        <li {...schedule}>
         {schedule}
         <Appointment key="last" time="5pm"/>
-        </li>
       </section>
     </main>
   );

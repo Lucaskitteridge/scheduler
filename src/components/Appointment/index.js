@@ -58,7 +58,7 @@ export default function Appointment(props) {
 
     //All the possible different windows in the apoointment windows and when they're callee
   return (
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SAVE && <Status message={"Saving"} />}

@@ -1,6 +1,7 @@
 import { useEffect, useState} from 'react';
 import axios from 'axios';
 
+
 export default function useApplicationData() {
   const [state, setState] = useState({
     day: "Monday",
@@ -11,6 +12,8 @@ export default function useApplicationData() {
 
   //Adding in interviews
   function bookInterview(id, interview) {
+    const interviewDay = state.days.findIndex(day => day.appointments.includes(id))
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -19,10 +22,17 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    const day = {
+      ...state.days[interviewDay],
+      spots: state.days[interviewDay].spots - 1
+    }
+    const days = [...state.days]
+    days.splice(interviewDay, 1, day)
 
     setState({
       ...state,
-      appointments
+      appointments,
+      days
     });
     return axios.put(`/api/appointments/${id}`, { interview })
     .then((response) => {
@@ -32,6 +42,21 @@ export default function useApplicationData() {
 
   //Remove the selected interview
   function deleteInterview(id, interview) {
+
+    const interviewDay = state.days.findIndex(day => day.appointments.includes(id))
+
+    const day = {
+      ...state.days[interviewDay],
+      spots: state.days[interviewDay].spots + 1
+    }
+    const days = [...state.days]
+    days.splice(interviewDay, 1, day)
+
+    setState({
+      ...state,
+      days
+    });
+
     return (
       axios.delete(`/api/appointments/${id}`, { interview })
       .then((response) => {
@@ -50,7 +75,7 @@ export default function useApplicationData() {
     ]).then((all) => {
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
     })
-  }, [state])
+  }, [])
 
   return {
     state,

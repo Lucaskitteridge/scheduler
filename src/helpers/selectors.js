@@ -26,13 +26,3 @@ export function getInterviewersForDay(state, dayname) {
     return []
   }
 };
-
-export function getTotalSpotsForDay(state, dayName) {
-  return state.days
-    .find(day => {
-      return day.name === dayName;
-    })
-    .appointments.filter(appointment => {
-      return state.appointments[appointment].interview === null;
-    }).length;
-}
