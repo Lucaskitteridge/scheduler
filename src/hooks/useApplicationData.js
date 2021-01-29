@@ -12,7 +12,6 @@ export default function useApplicationData() {
 
   //Adding in interviews
   function bookInterview(id, interview) {
-    
     const interviewDay = state.days.findIndex(day => day.appointments.includes(id))
 
     const appointment = {
@@ -43,6 +42,15 @@ export default function useApplicationData() {
   //Remove the selected interview
   function deleteInterview(id, interview) {
 
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
     const interviewDay = state.days.findIndex(day => day.appointments.includes(id))
 
     const day = {
@@ -52,13 +60,16 @@ export default function useApplicationData() {
     const days = [...state.days]
     days.splice(interviewDay, 1, day)
 
+    console.log(appointment)
+
     setState({
       ...state,
+      appointments,
       days
     });
 
     return (
-      axios.delete(`/api/appointments/${id}`, { interview })
+      axios.delete(`/api/appointments/${id}`)
       .then((response) => {
       })
     )
