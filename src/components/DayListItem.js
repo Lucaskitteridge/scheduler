@@ -6,13 +6,13 @@ import "components/DayListItem.scss";
 export default function DayListItem(props) {
   
   //Shows how many available spots are remaining for each day
-  const formatSpots = function (props) {
+  const formatSpots = function(props) {
     if (props.spots === 0) {
-      return 'no spots remaining'
+      return 'no spots remaining';
     } else if (props.spots === 1) {
-      return "1 spot remaining"
+      return "1 spot remaining";
     } else {
-      return props.spots + " spots remaining"
+      return props.spots + " spots remaining";
     }
   };
 
@@ -23,8 +23,8 @@ export default function DayListItem(props) {
   
   return (
     <li data-testid="day" className= {dayListItemClass} onClick={() => props.setDay(props.name)}>
-      <h2 className="text--regular">{props.name}</h2> 
+      <h2 className="text--regular">{props.name}</h2>
       <h3 className="text--light">{formatSpots(props)}</h3>
     </li>
   );
-};
+}

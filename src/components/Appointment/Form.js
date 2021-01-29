@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
@@ -11,15 +11,15 @@ export default function Form(props) {
 
   function reset() {
     setName("");
-    setInterviewer(null)
-  };
+    setInterviewer(null);
+  }
 
   function validate() {
     if (name === "") {
       setError("Student name cannot be blank");
       return;
     } else if (interviewer === null) {
-      setError("Must select an interviewer")
+      setError("Must select an interviewer");
       return;
     }
     setError("");
@@ -55,5 +55,5 @@ export default function Form(props) {
         </section>
       </section>
     </main>
-  )
-};
+  );
+}

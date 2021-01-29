@@ -6,7 +6,7 @@ import Form from "./Form";
 import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
-import Status from"./Status";
+import Status from "./Status";
 import Confirm from "./Confirm";
 import Error from "./Error";
 
@@ -28,33 +28,33 @@ export default function Appointment(props) {
   
   //Calling the deleteInterview function to remove from database and then transition
   function remove(event) {
-    const interview = null
+    const interview = null;
     transition(DELETE, true);
     props.deleteInterview(props.id, interview)
-    .then(() => {
-      transition(EMPTY)
-    })
-    .catch(() => {
-      transition(ERROR_DELETE, true)
-    })
+      .then(() => {
+        transition(EMPTY);
+      })
+      .catch(() => {
+        transition(ERROR_DELETE, true);
+      })
   }
 
   function save(name, interviewer) {
     const interview = {
       student: name,
       interviewer
-    }
+    };
 
     transition(SAVE);
 
     props.bookInterview(props.id, interview)
-    .then(() => {
-      transition(SHOW);
-    })
-    .catch(() => {
-      transition(ERROR_SAVE, true);
-    })
-  };
+      .then(() => {
+        transition(SHOW);
+      })
+      .catch(() => {
+        transition(ERROR_SAVE, true);
+      })
+  }
 
     //All the possible different windows in the apoointment windows and when they're callee
   return (
@@ -75,9 +75,9 @@ export default function Appointment(props) {
       {mode === DELETE && <Status message={"Deleting"} />}
       {mode === EDIT && <Form name={props.interview.student} onSave={(name, interviewer) => save(name, interviewer)} onCancel={back} interviewer={props.interview.interviewer.id} interviewers={props.interviewers}/>}
       {mode === ERROR_SAVE && (props.interview ?
-          <Error message="Error saving! Please try again later" onClose={back}/> :
-          <Error message="Error saving! Please try again later" onClose={back}/>)}
+        <Error message="Error saving! Please try again later" onClose={back}/> :
+        <Error message="Error saving! Please try again later" onClose={back}/>)}
       {mode === ERROR_DELETE && <Error message="Error deleting! Please try again" onClose={() => transition(SHOW)}/>}
     </article>
-  )
-};
+  );
+}
