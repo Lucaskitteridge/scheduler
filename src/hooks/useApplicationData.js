@@ -12,6 +12,7 @@ export default function useApplicationData() {
 
   //Adding in interviews
   function bookInterview(id, interview) {
+    
     const interviewDay = state.days.findIndex(day => day.appointments.includes(id))
 
     const appointment = {
@@ -36,7 +37,6 @@ export default function useApplicationData() {
     });
     return axios.put(`/api/appointments/${id}`, { interview })
     .then((response) => {
-      // add response later 
     })
   }
 

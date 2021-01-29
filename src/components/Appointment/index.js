@@ -1,24 +1,24 @@
-import React from 'react'
+import React from 'react';
 
 import "components/Appointment/styles.scss";
-import useVisualMode from "hooks/useVisualMode"
-import Form from "./Form"
-import Header from "./Header"
-import Show from "./Show"
-import Empty from "./Empty"
-import Status from"./Status"
-import Confirm from "./Confirm"
-import Error from "./Error"
+import useVisualMode from "hooks/useVisualMode";
+import Form from "./Form";
+import Header from "./Header";
+import Show from "./Show";
+import Empty from "./Empty";
+import Status from"./Status";
+import Confirm from "./Confirm";
+import Error from "./Error";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
-const CREATE = "CREATE"
-const SAVE = "SAVE"
-const DELETE = "DELETE"
-const CONFIRM = "CONFIRM"
-const EDIT = "EDIT"
+const CREATE = "CREATE";
+const SAVE = "SAVE";
+const DELETE = "DELETE";
+const CONFIRM = "CONFIRM";
+const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
-const ERROR_DELETE = "ERROR_DELETE"
+const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   
@@ -49,12 +49,12 @@ export default function Appointment(props) {
 
     props.bookInterview(props.id, interview)
     .then(() => {
-      transition(SHOW)
+      transition(SHOW);
     })
     .catch(() => {
-      transition(ERROR_SAVE, true)
-    });
-    }
+      transition(ERROR_SAVE, true);
+    })
+  };
 
     //All the possible different windows in the apoointment windows and when they're callee
   return (
@@ -80,4 +80,4 @@ export default function Appointment(props) {
       {mode === ERROR_DELETE && <Error message="Error deleting! Please try again" onClose={() => transition(SHOW)}/>}
     </article>
   )
-}
+};
