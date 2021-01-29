@@ -1,3 +1,4 @@
+//Selects the appointments for each day
 export function getAppointmentsForDay(state, dayname) {
   const day = state.days.find(day => day.name === dayname);
   if (day) {
@@ -7,6 +8,7 @@ export function getAppointmentsForDay(state, dayname) {
   }
 }
 
+//Matches up student and selected interviewer
 export function getInterview(state, interview) {
   if (interview) {
     return {
@@ -18,6 +20,7 @@ export function getInterview(state, interview) {
   }
 }
 
+//Gets all the interviewers available for a current day
 export function getInterviewersForDay(state, dayname) {
   const day = state.days.find(day => day.name === dayname);
   if (day) {

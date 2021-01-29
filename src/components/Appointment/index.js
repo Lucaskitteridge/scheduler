@@ -56,7 +56,7 @@ export default function Appointment(props) {
       })
   }
 
-    //All the possible different windows in the apoointment windows and when they're callee
+    //All the possible different windows in the apoointment windows and when they're called. Uses the useVisualMode hook
   return (
     <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
