@@ -12,7 +12,8 @@ export default function Application() {
     state,
     setDay,
     bookInterview,
-    deleteInterview
+    deleteInterview,
+    editInterview
   } = useApplicationData();
 
   //Maping the schedule for the day and passing the info for each day as props
@@ -27,6 +28,7 @@ export default function Application() {
         interviewers={getInterviewersForDay(state, state.day)}
         bookInterview={bookInterview}
         deleteInterview={deleteInterview}
+        editInterview={editInterview}
       />
     );
   });

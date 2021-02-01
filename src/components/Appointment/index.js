@@ -56,6 +56,23 @@ export default function Appointment(props) {
       })
   }
 
+  function edit(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    };
+
+    transition(SAVE);
+
+    props.editInterview(props.id, interview)
+      .then(() => {
+        transition(SHOW);
+      })
+      .catch(() => {
+        transition(ERROR_SAVE, true);
+      })
+  }
+
     //All the possible different windows in the apoointment windows and when they're called. Uses the useVisualMode hook
   return (
     <article className="appointment" data-testid="appointment">
@@ -73,7 +90,7 @@ export default function Appointment(props) {
       )}
       {mode === CONFIRM && <Confirm message={"Are you sure?"} onConfirm={remove} onCancel={back}/>}
       {mode === DELETE && <Status message={"Deleting"} />}
-      {mode === EDIT && <Form name={props.interview.student} onSave={(name, interviewer) => save(name, interviewer)} onCancel={back} interviewer={props.interview.interviewer.id} interviewers={props.interviewers}/>}
+      {mode === EDIT && <Form name={props.interview.student} onSave={(name, interviewer) => edit(name, interviewer)} onCancel={back} interviewer={props.interview.interviewer.id} interviewers={props.interviewers}/>}
       {mode === ERROR_SAVE && (props.interview ?
         <Error message="Error saving! Please try again later" onClose={back}/> :
         <Error message="Error saving! Please try again later" onClose={back}/>)}
