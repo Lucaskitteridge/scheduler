@@ -12,22 +12,17 @@ export default function useApplicationData() {
   //Adding in interviews
   function bookInterview(id, interview) {
 
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-    
-    setState({
-      ...state,
-      appointments,
-    });
-
     return axios.put(`/api/appointments/${id}`, { interview })
       .then((response) => {
+
+        const appointment = {
+          ...state.appointments[id],
+          interview: { ...interview }
+        };
+        const appointments = {
+          ...state.appointments,
+          [id]: appointment
+        };
 
         const interviewDay = state.days.findIndex(day => day.appointments.includes(id));
 
@@ -40,7 +35,8 @@ export default function useApplicationData() {
 
         setState({
           ...state,
-          days
+          days,
+          appointments
         });
     });
   }
