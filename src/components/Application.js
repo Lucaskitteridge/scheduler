@@ -4,7 +4,11 @@ import "components/Application.scss";
 import DayList from "./DayList";
 import "components/Appointment";
 import Appointment from "components/Appointment";
-import {getAppointmentsForDay, getInterview, getInterviewersForDay} from "helpers/selectors";
+import {
+  getAppointmentsForDay,
+  getInterview,
+  getInterviewersForDay,
+} from "helpers/selectors";
 import useApplicationData from "hooks/useApplicationData";
 
 export default function Application() {
@@ -13,7 +17,7 @@ export default function Application() {
     setDay,
     bookInterview,
     deleteInterview,
-    editInterview
+    editInterview,
   } = useApplicationData();
 
   //Maping the schedule for the day and passing the info for each day as props
@@ -23,7 +27,7 @@ export default function Application() {
     return (
       <Appointment
         {...appointment}
-        key= {appointment.id}
+        key={appointment.id}
         interview={interview}
         interviewers={getInterviewersForDay(state, state.day)}
         bookInterview={bookInterview}
@@ -43,11 +47,7 @@ export default function Application() {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList
-            days={state.days}
-            day={state.day}
-            setDay={setDay}
-          />
+          <DayList days={state.days} day={state.day} setDay={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -57,7 +57,7 @@ export default function Application() {
       </section>
       <section className="schedule">
         {schedule}
-        <Appointment key="last" time="5pm"/>
+        <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
