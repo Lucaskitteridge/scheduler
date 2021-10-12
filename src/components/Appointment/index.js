@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import "components/Appointment/styles.scss";
 import useVisualMode from "hooks/useVisualMode";
@@ -21,65 +21,73 @@ const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
-  
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-  
+
   //Calling the deleteInterview function to remove from database and then transition
   function remove(event) {
     const interview = null;
     transition(DELETE, true);
-    props.deleteInterview(props.id, interview)
+    props
+      .deleteInterview(props.id, interview)
       .then(() => {
         transition(EMPTY);
       })
       .catch(() => {
         transition(ERROR_DELETE, true);
-      })
+      });
   }
 
   function save(name, interviewer) {
     const interview = {
       student: name,
-      interviewer
+      interviewer,
     };
 
     transition(SAVE);
 
-    props.bookInterview(props.id, interview)
+    props
+      .bookInterview(props.id, interview)
       .then(() => {
         transition(SHOW);
       })
       .catch(() => {
         transition(ERROR_SAVE, true);
-      })
+      });
   }
 
   function edit(name, interviewer) {
     const interview = {
       student: name,
-      interviewer
+      interviewer,
     };
 
     transition(SAVE);
 
-    props.editInterview(props.id, interview)
+    props
+      .editInterview(props.id, interview)
       .then(() => {
         transition(SHOW);
       })
       .catch(() => {
         transition(ERROR_SAVE, true);
-      })
+      });
   }
 
-    //All the possible different windows in the apoointment windows and when they're called. Uses the useVisualMode hook
+  //All the possible different windows in the apoointment windows and when they're called. Uses the useVisualMode hook
   return (
     <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SAVE && <Status message={"Saving"} />}
-      {mode === CREATE && <Form onSave={(name, interviewer) => save(name, interviewer)} onCancel={back} interviewers={props.interviewers}/>}
+      {mode === CREATE && (
+        <Form
+          onSave={(name, interviewer) => save(name, interviewer)}
+          onCancel={back}
+          interviewers={props.interviewers}
+        />
+      )}
       {mode === SHOW && (
         <Show
           student={props.interview.student}
@@ -88,13 +96,37 @@ export default function Appointment(props) {
           onEdit={() => transition(EDIT)}
         />
       )}
-      {mode === CONFIRM && <Confirm message={"Are you sure?"} onConfirm={remove} onCancel={back}/>}
+      {mode === CONFIRM && (
+        <Confirm message={"Are you sure?"} onConfirm={remove} onCancel={back} />
+      )}
       {mode === DELETE && <Status message={"Deleting"} />}
-      {mode === EDIT && <Form name={props.interview.student} onSave={(name, interviewer) => edit(name, interviewer)} onCancel={back} interviewer={props.interview.interviewer.id} interviewers={props.interviewers}/>}
-      {mode === ERROR_SAVE && (props.interview ?
-        <Error message="Error saving! Please try again later" onClose={back}/> :
-        <Error message="Error saving! Please try again later" onClose={back}/>)}
-      {mode === ERROR_DELETE && <Error message="Error deleting! Please try again" onClose={() => transition(SHOW)}/>}
+      {mode === EDIT && (
+        <Form
+          name={props.interview.student}
+          onSave={(name, interviewer) => edit(name, interviewer)}
+          onCancel={back}
+          interviewer={props.interview.interviewer.id}
+          interviewers={props.interviewers}
+        />
+      )}
+      {mode === ERROR_SAVE &&
+        (props.interview ? (
+          <Error
+            message="Error saving! Please try again later"
+            onClose={back}
+          />
+        ) : (
+          <Error
+            message="Error saving! Please try again later"
+            onClose={back}
+          />
+        ))}
+      {mode === ERROR_DELETE && (
+        <Error
+          message="Error deleting! Please try again"
+          onClose={() => transition(SHOW)}
+        />
+      )}
     </article>
   );
 }

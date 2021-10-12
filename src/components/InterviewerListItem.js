@@ -1,11 +1,11 @@
 import React from "react";
-import classNames from 'classnames';
+import classNames from "classnames";
 
 import "components/InterviewerListItem.scss";
 
 export default function InterviewerListItem(props) {
   const InterviewerListItemClass = classNames("interviewers__item-image", {
-    "interviewers__item--selected ": props.selected
+    "interviewers__item--selected ": props.selected,
   });
 
   return (
@@ -16,5 +16,6 @@ export default function InterviewerListItem(props) {
         alt={props.name}
       />
       {props.selected && props.name}
-    </li>);
+    </li>
+  );
 }
