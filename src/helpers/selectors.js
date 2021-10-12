@@ -1,8 +1,8 @@
 //Selects the appointments for each day
 export function getAppointmentsForDay(state, dayname) {
-  const day = state.days.find(day => day.name === dayname);
+  const day = state.days.find((day) => day.name === dayname);
   if (day) {
-    return day.appointments.map(id => state.appointments[id]);
+    return day.appointments.map((id) => state.appointments[id]);
   } else {
     return [];
   }
@@ -13,7 +13,7 @@ export function getInterview(state, interview) {
   if (interview) {
     return {
       student: interview.student,
-      interviewer: state.interviewers[interview.interviewer]
+      interviewer: state.interviewers[interview.interviewer],
     };
   } else {
     return null;
@@ -22,9 +22,9 @@ export function getInterview(state, interview) {
 
 //Gets all the interviewers available for a current day
 export function getInterviewersForDay(state, dayname) {
-  const day = state.days.find(day => day.name === dayname);
+  const day = state.days.find((day) => day.name === dayname);
   if (day) {
-    return day.interviewers.map(id => state.interviewers[id]);
+    return day.interviewers.map((id) => state.interviewers[id]);
   } else {
     return [];
   }
