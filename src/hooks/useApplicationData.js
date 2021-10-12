@@ -43,22 +43,22 @@ export default function useApplicationData() {
 
   function editInterview(id, interview) {
 
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-    
-    setState({
-      ...state,
-      appointments,
-    });
-
     return axios.put(`/api/appointments/${id}`, { interview })
       .then((response) => {
+        const appointment = {
+          ...state.appointments[id],
+          interview: { ...interview }
+        };
+        const appointments = {
+          ...state.appointments,
+          [id]: appointment
+        };
+        
+        setState({
+          ...state,
+          appointments,
+        });
+    
     });
   }
 
